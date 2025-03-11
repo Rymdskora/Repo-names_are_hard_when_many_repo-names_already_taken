@@ -15,7 +15,7 @@ class EngineDisplay(EngineBase):
         self.delta_time = 0
 
     # Update the display, then repaint it once it has been updated.
-    def update(self):
+    def update(self) -> None:
         # Divide by 1000 to change from milliseconds to seconds?
         self.delta_time = self.timekeeper.tick(self.framerate) / 1000
         pygame.display.flip()

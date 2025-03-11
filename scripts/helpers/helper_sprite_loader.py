@@ -1,7 +1,9 @@
+from typing import List, Tuple
 import pygame
 
 
 # A class for creating sprite lists or sprite dictionaries.
+# TODO - Add some basic error checking.
 class HelperSpriteLoader:
     data_path = "data/"
 
@@ -9,7 +11,7 @@ class HelperSpriteLoader:
     # TODO - Implement sprite sheets that have a height of greater than 1!
     # TODO - Maybe clean it up too, this shit looks like it's going to explode if I look at it wrong.
     @classmethod
-    def load_sprite(cls, path, scale=1, frame_size=(0, 0)):
+    def load_sprite(cls, path: str, frame_size: Tuple, scale=1) -> List[pygame.Surface]:
         scaled_size = (frame_size[0] * scale, frame_size[1] * scale)
         full_path = cls.data_path + path
 
@@ -34,7 +36,7 @@ class HelperSpriteLoader:
 
     # Self-explanatory I guess.
     @classmethod
-    def get_subsurface(cls, image: pygame.Surface, frame_position=(0, 0), frame_size=(0, 0)):
+    def get_subsurface(cls, image: pygame.Surface, frame_position: Tuple, frame_size: Tuple) -> pygame.Surface:
         # Create a rectangle to cut subsurfaces from the parent surface at a specific position.
         cutter = pygame.Rect(frame_position, frame_size)
         subsurface = image.subsurface(cutter)

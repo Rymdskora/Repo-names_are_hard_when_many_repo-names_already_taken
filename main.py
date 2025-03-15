@@ -6,6 +6,8 @@ import sys
 
 # Engine class, core of the game.
 class Engine:
+
+    #
     def __init__(self):
         pygame.init()
         self.display = EngineDisplay(self)

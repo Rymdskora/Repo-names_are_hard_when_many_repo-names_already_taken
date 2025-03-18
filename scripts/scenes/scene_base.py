@@ -9,7 +9,7 @@ class SceneBase(ABC):
 
     #
     @abstractmethod
-    def update(self, events, screen: pygame.Surface, animate: bool, delta_time) -> None:
+    def update(self, events, screen: pygame.Surface, animate: bool, delta_time: float) -> None:
         pass
 
     #

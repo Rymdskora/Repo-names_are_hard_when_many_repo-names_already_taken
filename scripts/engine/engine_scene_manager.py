@@ -10,5 +10,5 @@ class EngineSceneManager(EngineBase):
         self.current_scene = SceneTestScene(self.engine)
 
     #
-    def change_scene(self, scene) -> None:
+    def change_scene(self, scene: str) -> None:
         self.current_scene = self.scenes[scene](self.engine)

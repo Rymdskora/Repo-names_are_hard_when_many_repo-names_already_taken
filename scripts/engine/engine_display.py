@@ -4,6 +4,8 @@ import pygame
 
 # Display component of the engine.
 class EngineDisplay(EngineBase):
+
+    # Self-explanatory.
     def __init__(self, engine):
         super().__init__(engine)
         # Make this dynamic and changeable, should have the option to change display resolution / flags.

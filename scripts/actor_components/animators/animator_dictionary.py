@@ -4,7 +4,7 @@ from typing import Dict, List
 import pygame
 
 
-#
+# TODO - Eventually, I need to create a way to blend between frames when state changes.
 class AnimatorDict(ComponentBase, AnimatorInterface):
 
     #
@@ -18,6 +18,10 @@ class AnimatorDict(ComponentBase, AnimatorInterface):
 
     #
     def set_animation_state(self, state: str):
+        # If running in a specific direction, run needs to be flipped based on
+        # the direction the character is moving horizontally.
+        # I'm sure others will need to be flipped too.
+
         valid_states = ['idle', 'run', 'crouch', 'jump', 'fall']
         if state in valid_states:
             self.state = state

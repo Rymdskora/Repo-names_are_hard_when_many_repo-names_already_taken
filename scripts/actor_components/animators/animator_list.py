@@ -29,6 +29,10 @@ class AnimatorList(ComponentBase, AnimatorInterface):
         self.entity.image = self.sprite_list[self.current_frame]
 
     #
+    def get_flipped_frame(self) -> pygame.Surface:
+        pass
+
+    #
     def update(self, animate: bool) -> None:
         if animate is True:
             self.on_animate()

@@ -44,8 +44,18 @@ class AnimatorDict(ComponentBase, AnimatorInterface):
             # Overstepped index, loop back to start of the animation.
             if self.current_frame >= self.num_sprites:
                 self.current_frame = 0
-        self.entity.image = self.sprite_dictionary[self.state][self.current_frame]
+
+        if self.entity.direction.x == -1:
+            self.entity.image = self.get_flipped_frame()
+        else:
+            self.entity.image = self.sprite_dictionary[self.state][self.current_frame]
         self.state_changed = False
+
+    # Only flips across the horizontal surface as I don't think I'll ever need a vertical flip!
+    def get_flipped_frame(self) -> pygame.Surface:
+        frame = self.sprite_dictionary[self.state][self.current_frame]
+        flipped_frame = pygame.transform.flip(frame, True, False)
+        return flipped_frame
 
     #
     def update(self, animate: bool) -> None:

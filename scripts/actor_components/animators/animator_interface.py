@@ -12,7 +12,7 @@ class AnimatorInterface(ABC):
 
     #
     @abstractmethod
-    def get_flipped_frame(self) -> pygame.Surface:
+    def get_reflected_frame(self) -> pygame.Surface:
         pass
 
     #

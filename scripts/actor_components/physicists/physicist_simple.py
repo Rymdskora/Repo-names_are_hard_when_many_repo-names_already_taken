@@ -9,7 +9,7 @@ class PhysicistSimple(ComponentBase, PhysicistInterface):
     #
     def __init__(self):
         super().__init__()
-        self.speed = 150
+        self.speed = 190
 
     #
     def move(self, delta_time: float):

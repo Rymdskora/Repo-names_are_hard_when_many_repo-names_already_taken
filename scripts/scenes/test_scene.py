@@ -1,3 +1,5 @@
+from scripts.controllers.commands.command_move import CommandMove
+
 from scripts.factories.factory_actor import FactoryActor
 from scripts.scenes.scene_base import SceneBase
 import pygame
@@ -22,13 +24,17 @@ class SceneTestScene(SceneBase):
         for event in events:
             if event.type == pygame.QUIT:
                 self.engine.quit()
-            elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-                self.flip = not self.flip
-                if self.flip is True:
-                    state = 'run'
-                else:
-                    state = 'idle'
-                self.dict_actor.animator.set_animation_state(state)
+
+        keys_pressed = pygame.key.get_pressed()
+        if keys_pressed[pygame.K_d]:
+            CommandMove.execute('right', self.dict_actor)
+            self.dict_actor.orchestrator.set_state('run')
+        elif keys_pressed[pygame.K_a]:
+            CommandMove.execute('left', self.dict_actor)
+            self.dict_actor.orchestrator.set_state('run')
+        else:
+            CommandMove.execute('none', self.dict_actor)
+            self.dict_actor.orchestrator.set_state('idle')
 
         self.sprites.update(delta_time, animate)
         self.draw(screen)

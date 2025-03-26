@@ -12,11 +12,12 @@ class OrchestratorActor(ComponentBase):
         self.last_state = self.current_state
 
     #
-    def set_state(self, state: str) -> None:
+    def set_states(self, state: str) -> None:
         if state in self.states:
             if state != self.current_state:
                 self.current_state = state
                 self.entity.animator.set_state(state)
+                self.entity.physicist.set_state(state)
             else:
                 pass
         else:

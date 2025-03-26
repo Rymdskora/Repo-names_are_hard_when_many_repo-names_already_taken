@@ -18,6 +18,7 @@ class FactoryActor:
         crouch = HelperSpriteLoader.load_sprite('_CrouchWalk.png', (120, 80), 2)
         sprite_states = {
             'idle': idle,
+            'walk': run,
             'run': run,
             'crouch': crouch,
         }

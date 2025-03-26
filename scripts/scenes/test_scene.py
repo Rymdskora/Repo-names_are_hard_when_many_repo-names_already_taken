@@ -27,14 +27,24 @@ class SceneTestScene(SceneBase):
 
         keys_pressed = pygame.key.get_pressed()
         if keys_pressed[pygame.K_d]:
+            if keys_pressed[pygame.K_LSHIFT]:
+                self.dict_actor.orchestrator.set_states('run')
+            elif keys_pressed[pygame.K_LCTRL]:
+                self.dict_actor.orchestrator.set_states('crouch')
+            else:
+                self.dict_actor.orchestrator.set_states('walk')
             CommandMove.execute('right', self.dict_actor)
-            self.dict_actor.orchestrator.set_state('run')
         elif keys_pressed[pygame.K_a]:
+            if keys_pressed[pygame.K_LSHIFT]:
+                self.dict_actor.orchestrator.set_states('run')
+            elif keys_pressed[pygame.K_LCTRL]:
+                self.dict_actor.orchestrator.set_states('crouch')
+            else:
+                self.dict_actor.orchestrator.set_states('walk')
             CommandMove.execute('left', self.dict_actor)
-            self.dict_actor.orchestrator.set_state('run')
         else:
             CommandMove.execute('none', self.dict_actor)
-            self.dict_actor.orchestrator.set_state('idle')
+            self.dict_actor.orchestrator.set_states('idle')
 
         self.sprites.update(delta_time, animate)
         self.draw(screen)

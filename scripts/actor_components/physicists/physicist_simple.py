@@ -9,7 +9,17 @@ class PhysicistSimple(ComponentBase, PhysicistInterface):
     #
     def __init__(self):
         super().__init__()
-        self.speed = 190
+        self.speed_states = {
+            'idle': 0,
+            'walk': 125,
+            'run': 190,
+            'crouch': 60,
+        }
+        self.speed = self.speed_states['idle']
+
+    #
+    def set_state(self, state: str):
+        self.speed = self.speed_states[state]
 
     #
     def move(self, delta_time: float):

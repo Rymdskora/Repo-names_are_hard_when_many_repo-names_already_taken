@@ -1,7 +1,5 @@
-from scripts.actor_components.orchestrators.orchestrator_actor import OrchestratorActor
 from scripts.actor_components.physicists.physicist_simple import PhysicistSimple
 from scripts.actor_components.animators.animator_dictionary import AnimatorDict
-from scripts.actor_components.animators.animator_list import AnimatorList
 from scripts.actors.actor_base import ActorBase
 from scripts.helpers.helper_sprite_loader import HelperSpriteLoader
 from typing import Tuple
@@ -23,11 +21,13 @@ class FactoryActor:
             'crouch': crouch,
         }
 
-        orchestrator = OrchestratorActor()
+
+        available_states = ['idle', 'walk', 'run', 'crouch']
+
         animator_dict = AnimatorDict(sprite_states)
         physicist = PhysicistSimple()
 
-        actor = ActorBase(orchestrator, animator_dict, physicist, position, groups)
+        actor = ActorBase(animator_dict, physicist, position, available_states, groups)
 
         if returned is not False:
             return actor

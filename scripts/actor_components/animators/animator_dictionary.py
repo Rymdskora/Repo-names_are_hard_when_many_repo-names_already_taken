@@ -1,15 +1,13 @@
 from scripts.actor_components.animators.animator_interface import AnimatorInterface
-from scripts.actor_components.component_base import ComponentBase
 from typing import Dict, List
 import pygame
 
 
 # TODO - Eventually, I need to create a way to blend between frames when state changes.
-class AnimatorDict(ComponentBase, AnimatorInterface):
+class AnimatorDict(AnimatorInterface):
 
     #
     def __init__(self, sprites: Dict[str, List[pygame.Surface]], state='idle'):
-        super().__init__()
         self.sprite_dictionary = sprites
         self.current_state = state
         self.current_frame = 0
@@ -27,24 +25,24 @@ class AnimatorDict(ComponentBase, AnimatorInterface):
         return self.sprite_dictionary[self.current_state][self.current_frame]
 
     #
-    def on_animate(self) -> None:
+    def on_animate(self, actor) -> None:
         self.current_frame += 1
         # Overstepped index, loop back to start of the animation.
         if self.current_frame >= self.num_sprites:
             self.current_frame = 0
 
-        self.should_reflect()
+        self.should_reflect(actor)
 
         if self.facing == 'right':
-            self.entity.image = self.sprite_dictionary[self.current_state][self.current_frame]
+            actor.image = self.sprite_dictionary[self.current_state][self.current_frame]
         else:
-            self.entity.image = self.get_reflected_frame()
+            actor.image = self.get_reflected_frame()
 
     #
-    def should_reflect(self):
-        if self.entity.direction.x == 1:
+    def should_reflect(self, actor):
+        if actor.direction.x == 1:
             self.facing = 'right'
-        elif self.entity.direction.x == -1:
+        elif actor.direction.x == -1:
             self.facing = 'left'
 
     # Only flips across the horizontal surface as I don't think I'll ever need a vertical flip!
@@ -54,6 +52,6 @@ class AnimatorDict(ComponentBase, AnimatorInterface):
         return flipped_frame
 
     #
-    def update(self, animate: bool) -> None:
+    def update(self, actor, animate: bool) -> None:
         if animate is True:
-            self.on_animate()
+            self.on_animate(actor)

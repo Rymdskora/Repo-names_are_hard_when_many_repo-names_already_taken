@@ -8,8 +8,8 @@ class ActorBase(pygame.sprite.Sprite):
     #
     def __init__(self, animator, physicist, position: Tuple[int, int], states, *groups):
         super().__init__(groups)
-        self.animator = animator.set_entity(self)
-        self.physicist = physicist.set_entity(self)
+        self.animator = animator
+        self.physicist = physicist
 
         self.image = self.animator.get_initial_frame()
         self.rect = self.image.get_frect(center=position)
@@ -32,5 +32,5 @@ class ActorBase(pygame.sprite.Sprite):
 
     #
     def update(self, delta_time: float, animate: bool):
-        self.animator.update(animate)
-        self.physicist.update(delta_time)
+        self.animator.update(self, animate)
+        self.physicist.update(self, delta_time)

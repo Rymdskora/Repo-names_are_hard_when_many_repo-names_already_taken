@@ -17,10 +17,10 @@ class AnimatorInterface(ABC):
 
     #
     @abstractmethod
-    def on_animate(self) -> None:
+    def on_animate(self, actor) -> None:
         pass
 
     #
     @abstractmethod
-    def update(self, animate: bool) -> None:
+    def update(self, actor, animate: bool) -> None:
         pass

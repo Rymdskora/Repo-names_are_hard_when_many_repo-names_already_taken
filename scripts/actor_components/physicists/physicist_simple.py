@@ -1,14 +1,12 @@
 from scripts.actor_components.physicists.physicist_interface import PhysicistInterface
-from scripts.actor_components.component_base import ComponentBase
 import pygame
 
 
 #
-class PhysicistSimple(ComponentBase, PhysicistInterface):
+class PhysicistSimple(PhysicistInterface):
 
     #
     def __init__(self):
-        super().__init__()
         self.speed_states = {
             'idle': 0,
             'walk': 125,
@@ -22,11 +20,11 @@ class PhysicistSimple(ComponentBase, PhysicistInterface):
         self.speed = self.speed_states[state]
 
     #
-    def move(self, delta_time: float):
-        if self.entity.direction.magnitude() != 0:
-            movement = self.entity.direction.normalize() * self.speed * delta_time
-            self.entity.rect.center += movement
+    def move(self, actor, delta_time: float):
+        if actor.direction.magnitude() != 0:
+            movement = actor.direction.normalize() * self.speed * delta_time
+            actor.rect.center += movement
 
     #
-    def update(self, delta_time: float):
-        self.move(delta_time)
+    def update(self, actor, delta_time: float):
+        self.move(actor, delta_time)

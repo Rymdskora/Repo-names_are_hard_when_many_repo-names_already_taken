@@ -22,6 +22,7 @@ class ActorBase(pygame.sprite.Sprite):
 
         # Hold a certain state because of condition(s)?
         self.steady_state = False
+        self.flags = 0
 
     #
     def __repr__(self):
@@ -39,7 +40,8 @@ class ActorBase(pygame.sprite.Sprite):
         elif not component_contained:
             raise AttributeError(f'Component: "{component}" is not in {self.__dict__}!')
 
-    #
+    # TODO - Make state updates check against current flags and change behavior based on
+    # TODO - the interaction between the incoming state and the raised flags!
     def set_component_states(self, state: str) -> None:
         if state in self.states:
             if state != self.current_state:
@@ -62,5 +64,5 @@ class ActorBase(pygame.sprite.Sprite):
     def update(self, delta_time: float, animate: bool):
         self.animator.update(self, animate)
         self.physicist.update(self, delta_time)
-        flags = self.sentinel.update(self)
-        self.manage_flags(flags)
+        sentinels_flags = self.sentinel.update(self)
+        Flags.manage_actor_flags(self, sentinels_flags)

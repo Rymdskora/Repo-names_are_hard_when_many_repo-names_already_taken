@@ -9,20 +9,20 @@ class AnimatorDict(AnimatorInterface):
     #
     def __init__(self, sprites: Dict[str, List[pygame.Surface]], state='idle'):
         self.sprite_dictionary = sprites
-        self.current_state = state
+        self.state = state
         self.current_frame = 0
         self.facing = 'right'
-        self.num_sprites = len(self.sprite_dictionary[self.current_state])
+        self.num_sprites = len(self.sprite_dictionary[self.state])
 
     #
     def set_state(self, state: str) -> None:
-        self.current_state = state
+        self.state = state
         self.current_frame = 0
-        self.num_sprites = len(self.sprite_dictionary[self.current_state])
+        self.num_sprites = len(self.sprite_dictionary[self.state])
             
     #
     def get_initial_frame(self) -> pygame.Surface:
-        return self.sprite_dictionary[self.current_state][self.current_frame]
+        return self.sprite_dictionary[self.state][self.current_frame]
 
     #
     def on_animate(self, actor) -> None:
@@ -34,7 +34,7 @@ class AnimatorDict(AnimatorInterface):
         self.should_reflect(actor)
 
         if self.facing == 'right':
-            actor.image = self.sprite_dictionary[self.current_state][self.current_frame]
+            actor.image = self.sprite_dictionary[self.state][self.current_frame]
         else:
             actor.image = self.get_reflected_frame()
 
@@ -47,7 +47,7 @@ class AnimatorDict(AnimatorInterface):
 
     # Only flips across the horizontal surface as I don't think I'll ever need a vertical flip!
     def get_reflected_frame(self) -> pygame.Surface:
-        frame = self.sprite_dictionary[self.current_state][self.current_frame]
+        frame = self.sprite_dictionary[self.state][self.current_frame]
         flipped_frame = pygame.transform.flip(frame, True, False)
         return flipped_frame
 

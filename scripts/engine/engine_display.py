@@ -21,4 +21,5 @@ class EngineDisplay(EngineBase):
         # Divide by 1000 to change from milliseconds to seconds?
         self.delta_time = self.timekeeper.tick(self.framerate) / 1000
         pygame.display.flip()
-        self.display.fill('black')
+        #self.display.fill('black')
+        self.display.fill((0, 50, 60))
